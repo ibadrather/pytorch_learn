@@ -44,7 +44,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("Executing the model on :",device)
 
 # Define the model
-architecture = "simple"
+architecture = "fc_net"
 model = get_model(architecture,n_features=n_inputs,  n_targets=n_outputs)
 model.to(device)
 summary(model, (1, n_inputs))

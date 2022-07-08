@@ -14,9 +14,8 @@ class MIMODataset(Dataset):
   def __getitem__(self, idx):
     feature = self.features[idx]
     target = self.targets[idx]
-    b = torch.Tensor(target)
-    b = b.view(-1)
-    return torch.Tensor(feature), b
+
+    return torch.Tensor(feature), torch.Tensor(target)
 
 
 class MIMODataModule(pl.LightningDataModule):

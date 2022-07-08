@@ -45,7 +45,7 @@ print("Number of Inputs: ", n_inputs)
 print("Number of Outputs: ", n_outputs)
 
 # Define the model
-architecture = "simple"
+architecture = "fc_net"
 net = get_model(architecture,n_features=n_inputs,  n_targets=n_outputs)
 summary(net, (1, n_inputs))
 

@@ -40,4 +40,4 @@ def gen_mimo_data(n=10000):
     data.to_csv("mimo_data.csv", index=False)
 
 if __name__ =="__main__":
-    gen_mimo_data(n=1000000)
+    gen_mimo_data(n=100000)

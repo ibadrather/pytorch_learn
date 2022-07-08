@@ -26,5 +26,6 @@ class LSTMModel(nn.Module):
 
     return self.regressor(out)
 
+
 if __name__ =="__main__":
     pass

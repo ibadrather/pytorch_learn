@@ -8,20 +8,17 @@ class MIMOPredictor(pl.LightningModule):
     self.model = model
     self.criterion = nn.MSELoss()
 
-  def forward(self, x, labels=None):
-    output = self.model(x)
-    loss = 0
-
-    if labels is not None:
-      loss = self.criterion(output, labels.unsqueeze(dim=1))
-    return loss, output
+  def forward(self, x):
+    return self.model(x)
 
   def training_step(self, batch, batch_idx):
     features, targets = batch
-    # print("Feature Shape", features.shape)
-    print("Target Shape", targets.shape)
+    
+    # Putting data into the network
+    output = self.forward(features)
 
-    loss, output = self.forward(features, targets)
+    # Calculating Loss
+    loss = self.criterion(output, targets)
 
     self.log("train_loss", loss, prog_bar=True, logger=True)
     return loss
@@ -29,7 +26,11 @@ class MIMOPredictor(pl.LightningModule):
   def validation_step(self, batch, batch_idx):
     features, targets = batch
 
-    loss, output = self.forward(features, targets)
+    # Putting data into the network
+    output = self.forward(features)
+
+    # Calculating Loss
+    loss = self.criterion(output, targets)
 
     self.log("val_loss", loss, prog_bar=True, logger=True)
     return loss
@@ -37,7 +38,11 @@ class MIMOPredictor(pl.LightningModule):
   def test_step(self, batch, batch_idx):
     features, targets = batch
 
-    loss, output = self.forward(features, targets)
+    # Putting data into the network
+    output = self.forward(features)
+
+    # Calculating Loss
+    loss = self.criterion(output, targets)
 
     self.log("test_loss", loss, prog_bar=True, logger=True)
     return loss
