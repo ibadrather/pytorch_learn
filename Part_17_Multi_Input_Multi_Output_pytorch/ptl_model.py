@@ -16,6 +16,9 @@ class MIMOPredictor(pl.LightningModule):
     
     # Putting data into the network
     output = self.forward(features)
+    # for lstm
+    if output.shape != targets.shape:
+      output = output.unsqueeze()
 
     # Calculating Loss
     loss = self.criterion(output, targets)
@@ -29,6 +32,10 @@ class MIMOPredictor(pl.LightningModule):
     # Putting data into the network
     output = self.forward(features)
 
+    # for lstm
+    if output.shape != targets.shape:
+      output = output.unsqueeze()
+
     # Calculating Loss
     loss = self.criterion(output, targets)
 
@@ -40,6 +47,10 @@ class MIMOPredictor(pl.LightningModule):
 
     # Putting data into the network
     output = self.forward(features)
+
+    # for lstm
+    if output.shape != targets.shape:
+      output = output.unsqueeze()
 
     # Calculating Loss
     loss = self.criterion(output, targets)
@@ -53,3 +64,4 @@ class MIMOPredictor(pl.LightningModule):
 
 if __name__ =="__main__":
     pass
+  
