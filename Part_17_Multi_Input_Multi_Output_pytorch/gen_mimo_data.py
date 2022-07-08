@@ -22,7 +22,6 @@ def gen_mimo_data(n=10000):
     p, q, r, s, t, u = 13*rand(n), 24*rand(n), 9*rand(n), \
                     2*rand(n), 34*rand(n), 19*rand(n)
 
-    # Multi-variate Outputs
     a, b, c, d = p/1.5, q/1.5, r/1.5, (s+t+u) / 5
     data = pd.DataFrame(
         dict(
