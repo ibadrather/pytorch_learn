@@ -14,6 +14,7 @@
 import numpy as np
 from numpy.random import rand
 import pandas as pd
+import pickle
 
 n = 100000
 def gen_mimo_data(n=10000):
@@ -37,7 +38,11 @@ def gen_mimo_data(n=10000):
             o_d = d
         )
     )
-    data.to_csv("mimo_data.csv", index=False)
+    
+    #data.to_csv("mimo_data.csv", index=False)
+    # I will save it as a pickle file to save space
+    with open("mimo_data.pkl", "wb") as f:
+        pickle.dump(data, f)
 
 if __name__ =="__main__":
     gen_mimo_data(n=100000)

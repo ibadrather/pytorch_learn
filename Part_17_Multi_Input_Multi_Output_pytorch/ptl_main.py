@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import pickle
 
 import torch
 from torchsummary import summary
@@ -22,7 +23,10 @@ except:
 pl.seed_everything(42)
 
 # Loading Data and Splitting into features and target arrays
-data = pd.read_csv("mimo_data.csv")
+#data = pd.read_csv("mimo_data.csv")
+with open('mimo_data.pkl', 'rb') as f:
+    data = pickle.load(f)
+
 features = data.values[ : , : 6]
 targets = data.values[ : , 6 :]
 
@@ -73,15 +77,14 @@ checkpoint_callback = ModelCheckpoint(
 logger = TensorBoardLogger("lightning_logs", name = "mimo-predict")
 
 early_stopping_callback = EarlyStopping(monitor = "val_loss", patience = 30)
-
+ 
 
 trainer = pl.Trainer(
     logger = logger,
-    checkpoint_callback = checkpoint_callback,
-    callbacks = [early_stopping_callback],
+    enable_progress_bar=True,
+    callbacks = [early_stopping_callback, early_stopping_callback],
     max_epochs = N_EPOCHS,
     gpus = 1,
-    progress_bar_refresh_rate = 30
     )
 
 trainer.fit(model, data_module)

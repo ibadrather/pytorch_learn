@@ -22,7 +22,7 @@ class MIMODataModule(pl.LightningDataModule):
   def __init__(
       self, train_features, train_targets, 
       test_features, test_targets, 
-      batch_size = 50
+      batch_size = 1
   ):
     super().__init__()
     self.train_features = train_features
